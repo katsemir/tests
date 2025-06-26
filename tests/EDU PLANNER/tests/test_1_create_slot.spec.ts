@@ -1,9 +1,9 @@
 import { test } from '@playwright/test';
 import * as dotenv from 'dotenv';
 import path from 'path';
-import { CalendarPage } from '../../../pages/CalendarPage';
-import { CreateEventPage } from '../../../pages/CreateEventPage';
-import { LoginPage } from '../../../pages/LoginPage';
+import { CalendarPage } from '../pages/CalendarPage';
+import { CreateEventPage } from '../pages/CreateEventPage';
+import { LoginPage } from '../pages/LoginPage';
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
