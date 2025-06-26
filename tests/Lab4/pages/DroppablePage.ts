@@ -1,32 +1,23 @@
-import { Page, expect } from '@playwright/test';
+import { Page } from 'playwright';
+import { BasePage } from './BasePage';
 
-export class DroppablePage {
-  constructor(private page: Page) {}
-
-  async goto() {
-    await this.page.goto('https://demoqa.com/droppable', {
-      waitUntil: 'networkidle'
-    });
-    await this.page.waitForSelector('#droppableExample-tab-simple');
-    await this.page.locator('#droppableExample-tab-simple').click();
+export class DroppablePage extends BasePage {
+  constructor(page: Page) {
+    super(page);
   }
 
-  async dragSimple() {
-    const source = this.page.locator('#draggable');
-    const target = this.page.locator('#simpleDropContainer #droppable');
+  async dragAndDrop(sourceSelector: string, targetSelector: string) {
+    const source = this.page.locator(sourceSelector);
+    const target = this.page.locator(targetSelector);
 
-    // Перевірка початкового стану
-    await expect(source).toBeVisible();
-    await expect(target).toHaveText('Drop here');
+    await source.waitFor();
+    await target.waitFor();
 
-    // Вимірювання часу перетягування
-    const start = Date.now();
     await source.dragTo(target);
-    const duration = Date.now() - start;
+  }
 
-    // Перевірка результату
-    await expect(target).toHaveText('Dropped!');
-    await expect(target).toHaveCSS('background-color', 'rgba(70, 130, 180, 1)');
-    expect(duration).toBeLessThan(3000);
+  async getDropZoneText(selector: string): Promise<string> {
+    const text = await this.page.locator(selector).textContent();
+    return text?.trim() || '';
   }
 }
