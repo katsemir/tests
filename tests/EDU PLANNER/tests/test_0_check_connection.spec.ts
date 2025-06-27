@@ -4,7 +4,7 @@ import path from 'path';
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
-test('Health-check: доступність сайту та логін', async ({ page }) => {
+test('Health-check: доступність сайту', async ({ page }) => {
   const login = process.env.LOGIN;
   const password = process.env.PASSWORD;
 
