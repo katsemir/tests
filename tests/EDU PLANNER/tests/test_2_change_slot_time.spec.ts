@@ -4,7 +4,7 @@ import path from 'path';
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
-test('Зміна часу Lesson Slot без зчитування поточного', async ({ page }) => {
+test('Зміна часу Lesson Slot', async ({ page }) => {
   const login = process.env.LOGIN;
   const password = process.env.PASSWORD;
 
